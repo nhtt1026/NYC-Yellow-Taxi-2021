@@ -14,9 +14,11 @@ City planners need evidence to answer two practical questions:
 This project provides both pricing and demand insights to support policy and infrastructure decisions.
 
 ## Dataset:
-**Data source:** [NYC Taxi & Limousine Commission (TLC) – Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)  
+**Data source:** [NYC Taxi & Limousine Commission (TLC) – Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+
 **Timeframe:** Full year 2021 (12 months)
-**Key fields used**
+
+**Key fields used:**
 - `PULocationID` (pickup zone)
 - `DOLocationID` (drop-off zone)
 - `fare_amount`
