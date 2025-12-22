@@ -26,4 +26,4 @@ This project provides both pricing and demand insights to support policy and inf
 - `tpep_pickup_datetime`
 - `tpep_dropoff_datetime`
 
-## Data Processing:
+## Approach:
