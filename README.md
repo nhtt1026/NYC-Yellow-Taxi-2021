@@ -46,11 +46,11 @@ This indicates the main temporal effect is **demand concentration**, not time-ba
 ### 3) Rush-hour hotspots concentrate in a small set of zones:
 The same zones repeatedly appear in the top 10 lists for both pickups and drop-offs during commuter peaks, indicating stable “mobility nodes” suitable for taxi stand investment.
 
-**Morning rush (7AM–10AM)**
+**Morning rush (7AM–10AM):**
 - **Top pickups:** `PULocationID 236` (**~304,282** trips), `237` (**~263,793** trips)
 - **Top drop-offs:** `DOLocationID 161` (**~304,260** trips), `237` (**~266,977**), `236` (**~261,453**)
 
-**Evening peak (4PM–7PM)**
+**Evening peak (4PM–7PM):**
 - **Top pickups:** `PULocationID 237` (**~444,859** trips), `236` (**~381,812** trips)
 - **Top drop-offs:** `DOLocationID 236` (**~383,631** trips), `237` (**~358,887** trips)
 
