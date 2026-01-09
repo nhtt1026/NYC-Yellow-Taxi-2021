@@ -56,6 +56,60 @@ The same zones repeatedly appear in the top 10 lists for both pickups and drop-o
 
 These patterns suggest strong commuter-style flows that repeatedly connect the same core zones. For infrastructure planning, this consistency is more valuable than one-off spikes because it indicates persistent demand across the year.
 
+## Recommendations:
+
+### 1) Prioritise taxi stands and curb pickup space in the highest two-way demand corridor (Zones **236 ↔ 237**):
+Provision additional **taxi stands**, **dedicated curb pickup space**, and **clear wayfinding** in zones **236** and **237**. Because demand is consistently high in both directions, this location is likely to deliver the largest operational benefit like reduced curbside congestion, improved pickup flow, or better driver turnover.
+
+### 2) Treat **Zone 161** as a commuter “pressure point” & Improve peak-hour drop-off handling:
+Around Zone **161** during morning rush, consider operational controls such as:
+- designated taxi loading zones (pick-up/drop-off separation),
+- short-stay holding areas,
+- signage and lane markings to reduce double-parking and bottlenecks.
+This is especially relevant where the same zones dominate both pickup and drop-off activities. Implement these **drop-off prioritisation and curb separation** will have reduce bottlenecks and improve pedestrian safety around these heavy commuter movements.
+
+### 3) Use time-based curb rules for recurring peak hotspots (Zones **162, 170, 142, 163, 234, 239**):
+Instead of building permanent taxi infrastructure everywhere, apply **peak-hour curb management** in zones that repeatedly appear in the top 10 hotspot lists. This targets demand when it is highest, while keeping curb space available outside peak periods.
+
+**Recurring hotspot zones:**
+- **Morning rush pickups (7–10AM):** `236`, `237`, `186`, `141`, `170`, `239`, `238`, `140`, `142`, `162`  
+- **Evening peak pickups (4–7PM):** `237`, `236`, `161`, `162`, `142`, `170`, `132`, `163`, `239`, `234`  
+- **Evening peak drop-offs (4–7PM):** `236`, `237`, `239`, `142`, `141`, `238`, `48`, `170`, `263`, `79`  
+
+**Recommended Actions:**
+- time-window taxi loading zones (7–10AM and 4–7PM)
+- pickup vs drop-off separation
+- short-stay holding rules to reduce double-parking and curb conflicts
+
+This approach improves traffic flow and passenger safety during peak periods, without permanently removing curb capacity for other uses.
+
+### 4) Investigate extreme fare-per-mile outliers before proposing pricing policy changes:
+Fare-per-mile differs sharply by pickup zone:
+- **High outliers:** `PULocationID = 1` (**~$2,048/mile**), then `84` (**~$293/mile**) and `206` (**~$145/mile**)
+- **Low-fare zones:** `110`, `99`, `105`, `44`, `5` (about **$2.8–$4.2/mile**)
+
+These extremes are likely driven by **very short trips**, where the base fare and time-based charges dominate while distance is small.
+ 
+Before intervention, validate whether the pattern persists after robustness checks such as:
+- compare **median vs mean** fare-per-mile by zone,
+- exclude **ultra-short trips** (e.g., below a small distance threshold),
+- reviewing the distribution of trip distances in the outlier zones.
+
+This prevents policy decisions being driven by metric inflation from short-distance trips.
+
+### 5) Plan operations beyond rush hours because off-peak demand is higher overall:
+Trip volume is higher outside the defined peak windows:
+- **OFF_PEAK:** **~17.11M** trips  
+- **PEAK:** **~13.25M** trips
+
+Meanwhile, **average fare-per-mile is stable (~$7.53)** across both buckets.
+
+Ensure taxi-stand capacity planning and enforcement is designed for **full-day demand**, not only rush hours. Peak-time rules should be complemented by steady baseline infrastructure where demand remains consistently high across the day.
+
+
+### 6) Next Step: Extend the analysis using zone names and corridor heatmaps:
+For planning use, join a taxi zone lookup table to convert zone IDs to neighborhood/area names, and add a PU×DO heatmap for the highest-volume corridors. This would make recommendations easier for city planners and the public to interpret.
+
 ## Dataset:
 **Data source:** [NYC Taxi & Limousine Commission (TLC) – Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 
