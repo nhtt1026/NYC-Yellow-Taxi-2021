@@ -161,10 +161,25 @@ To understand whether these differences are citywide or driven by a few zones, I
 - The “fairness concern” is primarily concentrated in a **small right-tail of outlier zones** (above ~20.92), which should be prioritised for deeper review (e.g., checking whether outliers persist after filtering out ultra-short trips).
 
  ### 2) Top 10 vs Bottom 10 pickup zones by average fare-per-mile:
+ 
+ ### Top 10 pickup zones with the **highest** average fare-per-mile:
 
  <img width="1308" height="1026" alt="image" src="https://github.com/user-attachments/assets/5b7d04db-fe77-4a38-af70-b24a6e1a2b85" />
 
- <img width="1460" height="1074" alt="image" src="https://github.com/user-attachments/assets/6f8d82d4-5580-4c2b-8472-a7efdc2647c3" />
+<img width="2046" height="590" alt="image" src="https://github.com/user-attachments/assets/c0e1a55d-621d-4c4a-9dc2-0ed42eb69aa8" />
 
+- The chart is dominated by an extreme outlier: **EWR – Newark Airport (PULocationID 1)** at **~$2,048 per mile**.
+- This does **not** mean taxis “charge $2,048/mile”. It usually happens when a trip has a **very short recorded distance**, so the **starting fare + time/traffic waiting cost** becomes large compared to miles traveled.
+- Other high-fare zones (many in **Staten Island**) show a similar pattern: **short trips + congestion/wait time** can make “cost per mile” look high.
+
+### Bottom 10 pickup zones with the **lowest** average fare-per-mile
+ <img width="1460" height="1074" alt="image" src="https://github.com/user-attachments/assets/6f8d82d4-5580-4c2b-8472-a7efdc2647c3" />
+ 
+ <img width="2054" height="602" alt="image" src="https://github.com/user-attachments/assets/cc5e785a-983e-432e-bfa1-a95699d1c633" />
+
+- The lowest zones are much more consistent, around **~$2.9–$4.2 per mile**.
+- These areas likely have **longer trips on average**, so the **fixed starting fare** is spread across more distance, giving a lower per-mile cost.
+- Note: a few zones have **very small trip counts** (e.g., only 1 trip), so they should be treated as **less reliable** and checked before drawing strong conclusions.
+ 
 
 
