@@ -106,7 +106,6 @@ Meanwhile, **average fare-per-mile is stable (~$7.53)** across both buckets.
 
 Ensure taxi-stand capacity planning and enforcement is designed for **full-day demand**, not only rush hours. Peak-time rules should be complemented by steady baseline infrastructure where demand remains consistently high across the day.
 
-
 ### 6) Next Step: Extend the analysis using zone names and corridor heatmaps:
 For planning use, join a taxi zone lookup table to convert zone IDs to neighborhood/area names, and add a PU×DO heatmap for the highest-volume corridors. This would make recommendations easier for city planners and the public to interpret.
 
@@ -122,3 +121,50 @@ For planning use, join a taxi zone lookup table to convert zone IDs to neighborh
 - `trip_distance`
 - `tpep_pickup_datetime`
 - `tpep_dropoff_datetime`
+
+## Visualizations / Outputs:
+### 1) Average fare per mile by pickup zone
+
+<img width="1322" height="1126" alt="image" src="https://github.com/user-attachments/assets/d77dc7a1-2ecb-4b1f-a0d5-98192fe6ecf3" />
+
+First, I calculated **average fare per mile** (`fare_amount / trip_distance`) for each **pickup zone (PULocationID)** and enriched it with **PUBorough** and **PUZone** to make the results readable.
+
+- The results show **large variation across pickup zones**, meaning passengers can face very different “effective cost per mile” depending on where a trip starts.
+- The highest values are concentrated in a small number of zones, with **Newark Airport (EWR, PULocationID = 1)** appearing as an extreme outlier (~**2048 per mile**). This pattern is most consistent with **very short trips** where dividing by a small distance inflates the per-mile metric.
+- In contrast, many zones sit at much lower and more stable averages, suggesting that **fare fairness is generally consistent for most pickup locations**, with unfairness concerns mainly driven by a limited set of atypical zones.
+
+---
+To understand whether these differences are citywide or driven by a few zones, I visualised the **distribution of zone-level average fare-per-mile** and computed a box-style summary.
+
+### Histogram (zones per band):
+
+<img width="2056" height="638" alt="image" src="https://github.com/user-attachments/assets/7a54ed2a-429d-4b7d-b42b-7e1ff8a728c1" />
+
+- `< 5`: 12 zones
+- `5–10`: 136 zones
+- `10–20`: 87 zones
+- `20–50`: 18 zones
+- `50–100`: 6 zones
+- `100+`: 4 zones
+
+### Box-plot summary:
+<img width="1446" height="1092" alt="image" src="https://github.com/user-attachments/assets/df0855bb-6c33-4227-a459-ae99aba74155" />
+
+<img width="1584" height="1584" alt="image" src="https://github.com/user-attachments/assets/d3350fb8-4bd0-453b-b59d-a0dfc3d6fcc1" />
+
+- Median (typical zone): ~**9.41 per mile**
+- Upper fence (outlier threshold): ~**20.92 per mile**
+- Zones above upper fence: **27 zones**
+
+### Insights:
+- Most pickup zones cluster in the **5–20 per mile** range, indicating a broadly consistent pricing pattern for the majority of the city.
+- The “fairness concern” is primarily concentrated in a **small right-tail of outlier zones** (above ~20.92), which should be prioritised for deeper review (e.g., checking whether outliers persist after filtering out ultra-short trips).
+
+ ### 2) Top 10 vs Bottom 10 pickup zones by average fare-per-mile:
+
+ <img width="1308" height="1026" alt="image" src="https://github.com/user-attachments/assets/5b7d04db-fe77-4a38-af70-b24a6e1a2b85" />
+
+ <img width="1460" height="1074" alt="image" src="https://github.com/user-attachments/assets/6f8d82d4-5580-4c2b-8472-a7efdc2647c3" />
+
+
+
