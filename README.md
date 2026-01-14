@@ -106,8 +106,6 @@ Meanwhile, **average fare-per-mile is stable (~$7.53)** across both buckets.
 
 Ensure taxi-stand capacity planning and enforcement is designed for **full-day demand**, not only rush hours. Peak-time rules should be complemented by steady baseline infrastructure where demand remains consistently high across the day.
 
-### 6) Next Step: Extend the analysis using zone names and corridor heatmaps:
-For planning use, join a taxi zone lookup table to convert zone IDs to neighborhood/area names, and add a PU×DO heatmap for the highest-volume corridors. This would make recommendations easier for city planners and the public to interpret.
 
 ## Dataset:
 **Data source:** [NYC Taxi & Limousine Commission (TLC) – Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
@@ -195,42 +193,111 @@ Trips were split into:
 - The main difference is **demand volume**, not pricing: **OFF_PEAK has more trips overall**, while **PEAK still represents a very large share** of city travel during commute windows.  
   This points more toward **capacity and curb management** issues (queues, pickup efficiency) rather than time-based overcharging.
 
- ### 4) Taxi stand planning (hotspots):
-
-### 4.1) Count total trips by pickup and drop-off zones:
-
-<img width="1812" height="1592" alt="image" src="https://github.com/user-attachments/assets/3b8069cf-00ee-4b96-9da4-0362be983f60" />
-
-### 4.2) Top 10 pickup zones (7AM–10AM):
-
- <img width="1366" height="1202" alt="image" src="https://github.com/user-attachments/assets/5841e298-0eb7-4df6-b9f8-b1473ae35481" />
-
- <img width="2090" height="602" alt="image" src="https://github.com/user-attachments/assets/c223e1b4-6370-4916-aeb4-f8cf3296945e" />
- 
- ### 4.3) Top 10 drop-off zones (7AM–10AM):
-
- <img width="1312" height="1198" alt="image" src="https://github.com/user-attachments/assets/389babb5-9cac-4a20-bfe6-849a3fb35e88" />
-
- <img width="2074" height="588" alt="image" src="https://github.com/user-attachments/assets/fb77b808-c23a-4ae3-8a37-3ed9be2fb948" />
-
-  ### 4.4) Top 10 pickup zones (4PM–7PM):
-
-  <img width="1248" height="1204" alt="image" src="https://github.com/user-attachments/assets/b844a7c3-20fb-44cb-a27f-6b25752cd3c1" />
-
-  <img width="2070" height="634" alt="image" src="https://github.com/user-attachments/assets/52b581d5-e843-4f62-ab47-e2fe47210df5" />
-
-  ### 4.5) Top 10 drop-off zones (4PM–7PM):
-
-  <img width="1296" height="1202" alt="image" src="https://github.com/user-attachments/assets/735ae13b-62ce-4303-bf2b-f9c15118f779" />
-
-  <img width="2096" height="618" alt="image" src="https://github.com/user-attachments/assets/9df6905c-9814-4846-a74f-a9252450a9bf" />
-
-
-
-
+ ### 4) Hotspot Analysis for Taxi Stand Planning (Pickup/Drop-off Demand):
 
  
+This section identifies **where taxis are most frequently picked up and dropped off** to prioritize taxi stands, dedicated curb space, and wayfinding in the highest-demand zones.
 
+---
 
+### 4.1. Highest-volume pickup & drop-off pairs during the day:
 
+<img width="1770" height="1558" alt="image" src="https://github.com/user-attachments/assets/a4d83592-5ded-4861-be76-ee44c90f5a6c" />
 
+Most trips cluster in a few repeat **Manhattan corridors**, especially around the Upper East Side and Midtown.
+
+**Key patterns from the top pairs:**
+- **Strong two-way corridor:** **`237 (Upper East Side South) ↔ 236 (Upper East Side North)`** is the highest-volume movement (both directions appear at the top).
+- **High “within-zone” trips:** **`237 → 237`** and **`236 → 236`** also rank highly, suggesting many short local trips still competing for curb space.
+- **Midtown-linked connections repeat:** Some pairs involving **`161 (Midtown Center)`** and **`162 (Midtown East)`** show up frequently alongside Upper East Side zones.
+
+These recurring corridors are good for **fixed taxi stands** or **consistently managed curb pickup space**, because demand is sustained across the day rather than limited to a single time window.
+
+### 4.2. Morning rush hotspots (7–10AM)
+
+<img width="1366" height="1202" alt="image" src="https://github.com/user-attachments/assets/5841e298-0eb7-4df6-b9f8-b1473ae35481" />
+
+<img width="2090" height="602" alt="image" src="https://github.com/user-attachments/assets/c223e1b4-6370-4916-aeb4-f8cf3296945e" />
+
+**Top pickup zones (7–10AM)** are concentrated in Manhattan residential and commuter-connected areas:
+
+- `236 — Upper East Side North` (304,282)
+- `237 — Upper East Side South` (263,793)
+- `186 — Penn Station / Madison Sq West` (218,313)
+- `141 — Lenox Hill West` (170,297)
+- `170 — Murray Hill` (163,671)
+- `239 — Upper West Side South` (163,373)
+- `238 — Upper West Side North` (160,349)
+- `140 — Lenox Hill East` (157,007)
+- `142 — Lincoln Square East` (155,550)
+- `162 — Midtown East` (151,281)
+
+<img width="1312" height="1198" alt="image" src="https://github.com/user-attachments/assets/389babb5-9cac-4a20-bfe6-849a3fb35e88" />
+
+<img width="2074" height="588" alt="image" src="https://github.com/user-attachments/assets/fb77b808-c23a-4ae3-8a37-3ed9be2fb948" />
+
+**Top drop-off zones (7–10AM)** indicate where people are arriving during commuting hours:
+
+- `161 — Midtown Center` (304,260)
+- `237 — Upper East Side South` (266,977)
+- `236 — Upper East Side North` (261,453)
+- `162 — Midtown East` (212,060)
+- `170 — Murray Hill` (178,313)
+- `140 — Lenox Hill East` (168,378)
+- `163 — Midtown North` (151,281)
+- `234 — Union Sq` (128,465)
+- `141 — Lenox Hill West` (128,141)
+- `230 — Times Sq / Theatre District` (121,483)
+
+**Key takeaway**: 
+- The AM peak is dominated by a **Midtown destination cluster** (notably `161`, `162`, `163`, `230`, `234`) and **Upper East Side / Lenox Hill** zones (`236`, `237`, `140`, `141`), which are strong for **morning-specific curb management**.
+
+### 4.3) Evening peak hotspots (4–7PM):
+
+<img width="1248" height="1204" alt="image" src="https://github.com/user-attachments/assets/b844a7c3-20fb-44cb-a27f-6b25752cd3c1" />
+
+<img width="2070" height="634" alt="image" src="https://github.com/user-attachments/assets/52b581d5-e843-4f62-ab47-e2fe47210df5" />
+
+**Top pickup zones (4–7PM)** show the strongest departure areas in the evening:
+
+- `237 — Upper East Side South` (444,859)
+- `236 — Upper East Side North` (381,812)
+- `161 — Midtown Center` (376,246)
+- `162 — Midtown East` (294,832)
+- `142 — Lincoln Square East` (281,367)
+- `170 — Murray Hill` (269,075)
+- `132 — JFK Airport` (264,431)
+- `163 — Midtown North` (255,445)
+- `239 — Upper West Side South` (253,660)
+- `234 — Union Sq` (247,846)
+
+<img width="1296" height="1202" alt="image" src="https://github.com/user-attachments/assets/735ae13b-62ce-4303-bf2b-f9c15118f779" />
+
+<img width="2096" height="618" alt="image" src="https://github.com/user-attachments/assets/9df6905c-9814-4846-a74f-a9252450a9bf" />
+
+**Top drop-off zones (4–7PM)** show where riders are arriving later in the day:
+
+- `236 — Upper East Side North` (383,631)
+- `237 — Upper East Side South` (358,887)
+- `239 — Upper West Side South` (275,330)
+- `142 — Lincoln Square East` (266,567)
+- `141 — Lenox Hill West` (264,939)
+- `238 — Upper West Side North` (239,275)
+- `48 — Clinton East` (227,166)
+- `170 — Murray Hill` (226,602)
+- `263 — Yorkville West` (210,387)
+- `79 — East Village` (203,580)
+
+**Key takeaway**:
+- Evening demand expands into a broader set of Manhattan neighborhoods, but **the same core zones repeat** (`236`, `237`, `161`, `162`, `170`, `142`, `239`, `238`, `163`, `234`). These are the best for **repeatable peak-hour interventions** (not one-off changes).
+
+- ---
+
+### Recommended planning actions:
+
+- **Prioritize fixed taxi stands or curb pickup zones** in zones that repeatedly appear across morning & evening peaks:  
+  `236`, `237`, `161`, `162`, `170`, `142`, `239`, `238`, `163`, `234` (plus nearby zones like `141`, `230`, `263`).
+- **Use time-based curb rules** (peak windows only) in the densest corridors to reduce conflicts without dedicating space all day:
+  - Morning: manage arrivals into `161/162/163/230/234`
+  - Evening: manage departures from `161/162/163/234` and arrivals into `236/237/239/142`
+- **Add pick-up vs drop-off separation + clearer signage** in zones that appear as both pickup and drop-off hotspots (e.g., `236`, `237`, `142`, `170`), since mixed curb behavior increases congestion.
