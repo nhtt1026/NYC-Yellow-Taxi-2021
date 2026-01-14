@@ -162,7 +162,7 @@ To understand whether these differences are citywide or driven by a few zones, I
 
  ### 2) Top 10 vs Bottom 10 pickup zones by average fare-per-mile:
  
- ### Top 10 pickup zones with the **highest** average fare-per-mile:
+ ### Top 10 pickup zones:
 
  <img width="1308" height="1026" alt="image" src="https://github.com/user-attachments/assets/5b7d04db-fe77-4a38-af70-b24a6e1a2b85" />
 
@@ -172,14 +172,65 @@ To understand whether these differences are citywide or driven by a few zones, I
 - This does **not** mean taxis “charge $2,048/mile”. It usually happens when a trip has a **very short recorded distance**, so the **starting fare + time/traffic waiting cost** becomes large compared to miles traveled.
 - Other high-fare zones (many in **Staten Island**) show a similar pattern: **short trips + congestion/wait time** can make “cost per mile” look high.
 
-### Bottom 10 pickup zones with the **lowest** average fare-per-mile
+### Bottom 10 pickup zones:
  <img width="1460" height="1074" alt="image" src="https://github.com/user-attachments/assets/6f8d82d4-5580-4c2b-8472-a7efdc2647c3" />
  
  <img width="2054" height="602" alt="image" src="https://github.com/user-attachments/assets/cc5e785a-983e-432e-bfa1-a95699d1c633" />
 
 - The lowest zones are much more consistent, around **~$2.9–$4.2 per mile**.
 - These areas likely have **longer trips on average**, so the **fixed starting fare** is spread across more distance, giving a lower per-mile cost.
-- Note: a few zones have **very small trip counts** (e.g., only 1 trip), so they should be treated as **less reliable** and checked before drawing strong conclusions.
+- A few zones have **very small trip counts** (e.g., only 1 trip), so they should be treated as **less reliable** and checked before drawing strong conclusions.
+
+ ### 3) Peak vs Off-peak comparison:
+
+<img width="1346" height="778" alt="image" src="https://github.com/user-attachments/assets/920e05b2-94b2-48e9-8091-57d3df9d82da" />
+
+Trips were split into:
+- **PEAK (7–10AM and 4–7PM):** **17,113,798 trips**, average fare-per-mile **$7.5347**
+- **OFF_PEAK (all other hours):** **13,254,928 trips**, average fare-per-mile **$7.5262**
+  
+### Insights:
+- The average fare-per-mile is **almost identical** between peak and off-peak. 
+  This suggests there is **no clear time-of-day price uplift** in the 2021 Yellow Taxi data when measured using fare-per-mile.
+- The main difference is **demand volume**, not pricing: **OFF_PEAK has more trips overall**, while **PEAK still represents a very large share** of city travel during commute windows.  
+  This points more toward **capacity and curb management** issues (queues, pickup efficiency) rather than time-based overcharging.
+
+ ### 4) Taxi stand planning (hotspots):
+
+### 4.1) Count total trips by pickup and drop-off zones:
+
+<img width="1812" height="1592" alt="image" src="https://github.com/user-attachments/assets/3b8069cf-00ee-4b96-9da4-0362be983f60" />
+
+### 4.2) Top 10 pickup zones (7AM–10AM):
+
+ <img width="1366" height="1202" alt="image" src="https://github.com/user-attachments/assets/5841e298-0eb7-4df6-b9f8-b1473ae35481" />
+
+ <img width="2090" height="602" alt="image" src="https://github.com/user-attachments/assets/c223e1b4-6370-4916-aeb4-f8cf3296945e" />
  
+ ### 4.3) Top 10 drop-off zones (7AM–10AM):
+
+ <img width="1312" height="1198" alt="image" src="https://github.com/user-attachments/assets/389babb5-9cac-4a20-bfe6-849a3fb35e88" />
+
+ <img width="2074" height="588" alt="image" src="https://github.com/user-attachments/assets/fb77b808-c23a-4ae3-8a37-3ed9be2fb948" />
+
+  ### 4.4) Top 10 pickup zones (4PM–7PM):
+
+  <img width="1248" height="1204" alt="image" src="https://github.com/user-attachments/assets/b844a7c3-20fb-44cb-a27f-6b25752cd3c1" />
+
+  <img width="2070" height="634" alt="image" src="https://github.com/user-attachments/assets/52b581d5-e843-4f62-ab47-e2fe47210df5" />
+
+  ### 4.5) Top 10 drop-off zones (4PM–7PM):
+
+  <img width="1296" height="1202" alt="image" src="https://github.com/user-attachments/assets/735ae13b-62ce-4303-bf2b-f9c15118f779" />
+
+  <img width="2096" height="618" alt="image" src="https://github.com/user-attachments/assets/9df6905c-9814-4846-a74f-a9252450a9bf" />
+
+
+
+
+
+ 
+
+
 
 
