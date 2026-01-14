@@ -213,7 +213,7 @@ Most trips cluster in a few repeat **Manhattan corridors**, especially around th
 
 These recurring corridors are good for **fixed taxi stands** or **consistently managed curb pickup space**, because demand is sustained across the day rather than limited to a single time window.
 
-### 4.2. Morning rush hotspots (7–10AM)
+### 4.2. Morning rush hotspots (7–10AM):
 
 <img width="1366" height="1202" alt="image" src="https://github.com/user-attachments/assets/5841e298-0eb7-4df6-b9f8-b1473ae35481" />
 
@@ -249,10 +249,15 @@ These recurring corridors are good for **fixed taxi stands** or **consistently m
 - `141 — Lenox Hill West` (128,141)
 - `230 — Times Sq / Theatre District` (121,483)
 
+**Heatmap**
+
+<img width="2046" height="794" alt="image" src="https://github.com/user-attachments/assets/afc387ea-6479-4326-9dec-f2d2ea25200f" />
+
+
 **Key takeaway**: 
 - The AM peak is dominated by a **Midtown destination cluster** (notably `161`, `162`, `163`, `230`, `234`) and **Upper East Side / Lenox Hill** zones (`236`, `237`, `140`, `141`), which are strong for **morning-specific curb management**.
 
-### 4.3) Evening peak hotspots (4–7PM):
+### 4.3. Evening peak hotspots (4–7PM):
 
 <img width="1248" height="1204" alt="image" src="https://github.com/user-attachments/assets/b844a7c3-20fb-44cb-a27f-6b25752cd3c1" />
 
