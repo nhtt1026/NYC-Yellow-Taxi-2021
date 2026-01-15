@@ -1,66 +1,87 @@
 ## Project Summary:
 
-NYC city planners are concerned about unfair fare variation across pickup zones. Using the NYC TLC Yellow Taxi 2021 dataset, this project quantifies **fare fairness** using **average fare per mile** by pickup zone, evaluates **temporal effects** (peak vs off-peak), and identifies **pickup/drop-off hotspots** to recommend where additional taxi infrastructure (taxi stands, curb pickup zones) should be provisioned.
+NYC city planners are concerned about uneven travel costs and curbside congestion across neighborhoods. Using the NYC TLC Yellow Taxi 2021 trip records, this project:
+- Quantifies “fare fairness” using **average fare per mile** by pickup zone
+- Checks whether pricing patterns change between **peak vs off-peak** periods
+- Identifies **high-demand pickup/drop-off hotspots and recurring PU×DO corridors** to support taxi-stand placement and time-window curb management.
+
+To make results stakeholder-friendly, zone IDs are enriched with **borough and neighborhood zone names** using the NYC TLC taxi zone lookup table. The corridor heatmaps highlight where demand is **corridor-shaped** (repeated movements between paired zones), which is more actionable for curb planning than zone-only rankings.
 
 **Tools Used:**
-- **Databricks (Spark SQL):** primary tool for querying, aggregations, and insight generation  
-- **Python (PySpark):** used mainly for data ingestion (loading 12 monthly Parquet files and registering a SQL view)  
-- **Databricks Visualizations:** bar charts for hotspot comparisons and demand patterns
-
+- **Databricks (Spark SQL):** primary tool for data cleaning, aggregations, joins (trip table ↔ taxi zone lookup), corridor extraction, and KPI calculations (fare-per-mile, peak vs off-peak, PU×DO counts).
+- **Python (PySpark):** used for **data ingestion and table/view setup** (loading the 12 monthly Parquet files, creating the combined 2021 DataFrame, and registering a consistent SQL table/view used across all queries).
+- **Databricks Visualizations:** built-in charts for quick stakeholder-ready outputs
+    
 **Method:**
-Load 12 months (2021) → Register as SQL view (yellow_taxi_2021_temp) → Compute fare fairness by pickup zone → Compare top/bottom zones → Repeat for peak vs off-peak → Identify and visualize rush-hour pickup/drop-off hotspots
-
+1. **Ingest + standardize the dataset (2021):** load 12 monthly Yellow Taxi Parquet files and register a consistent SQL source (`yellow_taxi_2021_temp`) for all downstream analysis.
+2. **Apply basic validity filters:** exclude invalid records (e.g., `trip_distance <= 0`, `fare_amount <= 0`, missing PU/DO IDs) to avoid distorted averages and misleading corridor counts.
+3. **Fare fairness (zone-based):** compute **average fare per mile** by pickup zone and review distribution (histogram) + spread (box-style summary) to identify outliers.
+4. **Extreme zones comparison:** extract **Top 10 vs Bottom 10** pickup zones by average fare-per-mile and visualize with bar charts for fast comparison.
+5. **Peak vs off-peak check:** split trips into **peak vs off-peak** time buckets (using pickup hour) and compare trip volume + average fare-per-mile between buckets.
+6. **Hotspot planning (zone-based):** count trips by pickup and drop-off zones, then identify **Top 10 pickup/drop-off hotspots** for:
+   - **Morning rush (7–10AM)**
+   - **Evening peak (4–7PM)**
+7. **Corridor planning (PU×DO):** compute high-volume **pickup→drop-off pairs**, enrich with zone names, and visualize **PU×DO heatmaps** for morning and evening to highlight recurring corridors that drive curb demand.
+   
 ## Objectives:
-City planners need evidence to answer 2 practical questions:
-1.	**Fare fairness**: Do riders pay noticeably different rates depending on where trips start (pickup zones)?
-2.	**Taxi stand planning**: Where should the city allocate additional taxi infrastructure based on demand hotspots?
-This project provides both pricing and demand insights to support policy and infrastructure decisions.
+- **Measure fare fairness by pickup zone** using average fare per mile (`fare_amount / trip_distance`) and identify unusually high/low zones.
+- **Reduce misinterpretation from outliers** by interpreting extreme values in the context of short-distance trips (base fare + time charges dominating small distances).
+- **Compare peak vs off-peak patterns**, separating pricing stability from demand concentration effects.
+- **Identify rush-hour hotspots (morning 7–10AM, evening 4–7PM)** for both pickups and drop-offs to locate recurring pressure points.
+- **Build PU×DO corridor heatmaps (top corridors)** using zone names to reveal the highest-volume movements that drive curb congestion during commute windows.
+- **Translate findings into planning recommendations**: fixed stands where demand is persistent, flexible curb rules where demand is time-windowed.
 
 ## Key Findings:
 
-### 1) Fare fairness varies substantially by pickup zone (with a small set of extreme outliers):
-Average fare-per-mile differs widely across pickup zones. The highest values are concentrated in a small number of zones and are most consistent with **very short-distance trips** in dense areas, where the fixed base fare and time-based components dominate the per-mile metric. 
+### 1) Fare-per-mile varies by pickup zone, but the “fairness concern” is concentrated in a small set of outliers:
+Most zones cluster in a reasonable band, while a limited tail of zones shows extreme average fare-per-mile values. These extremes are most consistent with **very short trips** where the base fare and time-based charges dominate, inflating “per mile” metrics.
 
 ---
 
-### 2) Peak vs off-peak: per-mile pricing is stable, but demand differs materially:
-Citywide, average fare-per-mile is effectively the same across time buckets (~$7.53/mile), suggesting **no strong time-of-day price uplift** in fare-per-mile terms. The main temporal effect is **volume**:  
-- **PEAK trips (7–10AM and 4–7PM): ~13.25M**  
-- **OFF_PEAK trips (all other hours): ~17.11M**  
-
-This points to **capacity + curb management** as the main operational issue, not time-based overcharging.
+### 2) Peak vs off-peak pricing is broadly stable, but demand is not:
+Average fare-per-mile is similar across time buckets, suggesting the primary time-of-day effect is **demand concentration** rather than systematic price inflation. Planning implications therefore skew toward **capacity and curb management**, not pricing policy changes.
 
 ---
 
 ### 3) Rush-hour hotspots concentrate in a small Manhattan core and repeat across windows:
 The same zones recur in top-10 pickup and drop-off lists across commuter peaks, indicating **stable mobility nodes** suitable for targeted taxi infrastructure.  
 - Morning rush (7–10AM): pickups are led by **Upper East Side North (236)** and **Upper East Side South (237)**; drop-offs are led by **Midtown Center (161)** alongside **236/237**.
-- Evening peak (4–7PM): pickups and drop-offs remain dominated by **236/237** (plus nearby Midtown/Manhattan zones).
+- Evening peak (4–7PM): pickups and drop-offs remain dominated by **236/237** (& nearby Midtown/Manhattan zones).
+
+---
+
+### 4) Corridor heatmaps show demand is corridor-shaped, not just zone-shaped:
+Both morning and evening heatmaps surface a dominant, bidirectional Upper East Side corridor (**236 ↔ 237**) & repeated Midtown-linked connections. Evening patterns show higher corridor volumes and more destination variety (expanding to additional Midtown/Upper West Side links), reflecting “after-work” trip purposes beyond commute reversal.
 
 ## Recommendations:
 
-### 1) Prioritise taxi stands and managed curb pickup space along the highest two-way demand corridor (236 ↔ 237):
-The strongest recurring flows and the corridor heatmaps point to **Upper East Side North (236)** and **Upper East Side South (237)** as a high-leverage corridor for reducing curb friction. Focus on **clear stand placement, wayfinding, and active enforcement** to reduce double-parking and random curb stops.
+### 1) Focus taxi stands on the busiest pickup-to-drop-off routes, not only within single zones:
+Many trips repeatedly happen between the same pairs of areas. If only the pickup area has a taxi stand, the drop-off area can still get overcrowded. Placing or managing stands along both ends of these common routes helps reduce curbside congestion where it actually builds up.
 
 ---
 
-### 2) Treat Midtown Center (161) as a commuter “pressure point” in the morning and manage drop-off friction:
-Morning drop-offs concentrate strongly around Midtown (especially **161**), suggesting peak-hour congestion risk from drop-offs competing with pickups and through-traffic. Implement **pickup vs drop-off separation**, short-stay loading rules, and signage/lane markings near key Midtown arrival points to improve throughput and pedestrian safety.
+### 2) Treat the Upper East Side pair (236 & 237) as a coordinated operating cluster during commute windows:
+Because demand is consistently high in both directions (and within-zone trips remain meaningful), planning should coordinate stand placement, signage, and enforcement across both zones to prevent spillover stopping and double-parking.
 
 ---
 
-### 3) Use time-window curb rules for recurring peak hotspots, building “surge operations” and not citywide permanent buildout:
-Rather than placing permanent infrastructure everywhere, apply **peak-hour curb management (7–10AM, 4–7PM)** in zones that repeatedly appear in hotspot lists. This targets demand when it is highest while preserving curb flexibility outside peak periods.
+### 3) Apply time-window curb management around Midtown pressure points (e.g., 161/162/163) during the morning commute:
+Use pickup/drop-off separation, short-stay rules, and clear loading guidance to protect throughput and pedestrian safety where arrivals concentrate.
 
 ---
 
-### 4) Plan corridor-first (PU×DO) interventions, not only zone-first interventions:
-Heatmaps show demand clusters into a limited set of corridors. For the highest-volume corridors, small operational improvements (consistent enforcement, clear loading rules, curb signage) can reduce congestion without large construction. Place and manage stands where they relieve **both ends of the corridor** (origins and destinations), not only at the “top pickup zone.”
+### 4) Use a hybrid approach for the evening peak: fixed stands in the core corridors plus flexible loading rules in adjacent zones:
+Evening demand spreads into more varied destinations, so combining stable infrastructure in the top corridors with adaptable curb rules nearby helps absorb spikes without overbuilding permanent capacity.
 
 ---
 
 ### 5) Design beyond rush hours because off-peak demand is higher overall:
 Because OFF_PEAK trips exceed PEAK trips (~17.11M vs ~13.25M), baseline taxi-stand capacity and enforcement should support **full-day demand**, with peak-time rules layered on top for commuter surges.
+
+---
+
+### 6) Validate extreme fare-per-mile zones before proposing pricing interventions:
+Check whether outliers persist under robustness filters (e.g., excluding ultra-short trips, comparing median vs mean). This ensures decisions are not driven by metric inflation from small-distance denominators.
 
 ## Dataset:
 **Data source:** [NYC Taxi & Limousine Commission (TLC) – Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
@@ -68,12 +89,17 @@ Because OFF_PEAK trips exceed PEAK trips (~17.11M vs ~13.25M), baseline taxi-sta
 **Timeframe:** Full year 2021 (12 months)
 
 **Key fields used:**
-- `PULocationID` (pickup zone)
-- `DOLocationID` (drop-off zone)
-- `fare_amount`
-- `trip_distance`
-- `tpep_pickup_datetime`
-- `tpep_dropoff_datetime`
+  - `PULocationID`, `DOLocationID`
+  - `fare_amount`, `trip_distance`
+  - `tpep_pickup_datetime`, `tpep_dropoff_datetime`
+- **Basic validity filters applied in analysis:**
+  - `trip_distance > 0`
+  - `fare_amount > 0`
+  - non-null pickup/drop-off zone IDs
+
+**Lookup dataset (readability + mapping):** NYC TLC Taxi Zone Lookup  
+- Join key: `LocationID` ↔ (`PULocationID`, `DOLocationID`)  
+- Adds: `Borough`, `Zone` (for interpretation)
 
 ## Visualizations / Outputs:
 ### 1) Average fare per mile by pickup zone
