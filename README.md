@@ -249,13 +249,40 @@ These recurring corridors are good for **fixed taxi stands** or **consistently m
 - `141 — Lenox Hill West` (128,141)
 - `230 — Times Sq / Theatre District` (121,483)
 
-**Heatmap**
+**Morning rush (7–10AM) corridor heatmap:**
 
-<img width="2046" height="794" alt="image" src="https://github.com/user-attachments/assets/afc387ea-6479-4326-9dec-f2d2ea25200f" />
+<img width="2052" height="726" alt="image" src="https://github.com/user-attachments/assets/f2dc06f5-736e-43a5-a198-8acb6fcec8c0" />
 
+#### Insights for city planners:
 
-**Key takeaway**: 
-- The AM peak is dominated by a **Midtown destination cluster** (notably `161`, `162`, `163`, `230`, `234`) and **Upper East Side / Lenox Hill** zones (`236`, `237`, `140`, `141`), which are strong for **morning-specific curb management**.
+1) **Demand concentrates in a small Manhattan core, not spread evenly:**
+
+The highest-volume corridors cluster around **Upper East Side North (236)**, **Upper East Side South (237)**, and nearby **Midtown zones (161/162/163)**. This matches the morning hotspot results (top pickup and drop-off zones are overwhelmingly Manhattan) and points to a consistent commuter pattern rather than scattered demand.
+
+2) **Two-way corridors are prominent, showing repeated back-and-forth movement:**
+
+Both **236 → 237** and **237 → 236** appear among the strongest corridors. This is a key operational signal: these are not “drop-only” destinations. Pickup and drop-off pressure exists on both sides, so curb management needs to work in **both directions**.
+
+3) **Short “within-zone” trips remain high during the rush window:**
+   
+Strong within-zone flows such as **236 → 236** and **237 → 237** indicate meaningful local movement even in peak hours. Planning should not assume everyone is only commuting out of a zone; **local trips still compete for curb space**.
+
+4) **A small number of corridors explains a large share of morning activity:**
+   
+Focusing the heatmap on the **top corridor pairs** is appropriate for planning because it highlights where targeted interventions will have the largest impact, instead of spreading resources thinly across low-volume routes.
+
+---
+
+### Key takeaway for morning planning:
+
+- **Prioritize managed pickup space along the Upper East Side ↔ Midtown commuter spine, not just individual zones:**  
+The demand pattern is corridor-shaped. Stand placement that only targets one zone may not reduce congestion at the paired destination curb.
+
+- **Treat 236 and 237 as one operating cluster during 7–10AM:**  
+Because flows are strong in both directions and within-zone trips are high, these zones benefit from coordinated stand placement, signage, and enforcement rather than isolated decisions.
+
+- **Design for reliability, not only capacity:**  
+For the highest-volume corridors, practical measures (clearly marked stands, short stopping rules, consistent enforcement) can reduce random curb stopping and improve throughput without major new infrastructure.
 
 ### 4.3. Evening peak hotspots (4–7PM):
 
@@ -293,16 +320,37 @@ These recurring corridors are good for **fixed taxi stands** or **consistently m
 - `263 — Yorkville West` (210,387)
 - `79 — East Village` (203,580)
 
-**Key takeaway**:
-- Evening demand expands into a broader set of Manhattan neighborhoods, but **the same core zones repeat** (`236`, `237`, `161`, `162`, `170`, `142`, `239`, `238`, `163`, `234`). These are the best for **repeatable peak-hour interventions** (not one-off changes).
+**Evening peak (4–7PM) corridor heatmap:**
 
-- ---
+<img width="2044" height="708" alt="image" src="https://github.com/user-attachments/assets/aa6ce34d-53da-4a33-b452-2835c4b15a5c" />
 
-### Recommended planning actions:
+### Insights for city planners:
 
-- **Prioritize fixed taxi stands or curb pickup zones** in zones that repeatedly appear across morning & evening peaks:  
-  `236`, `237`, `161`, `162`, `170`, `142`, `239`, `238`, `163`, `234` (plus nearby zones like `141`, `230`, `263`).
-- **Use time-based curb rules** (peak windows only) in the densest corridors to reduce conflicts without dedicating space all day:
-  - Morning: manage arrivals into `161/162/163/230/234`
-  - Evening: manage departures from `161/162/163/234` and arrivals into `236/237/239/142`
-- **Add pick-up vs drop-off separation + clearer signage** in zones that appear as both pickup and drop-off hotspots (e.g., `236`, `237`, `142`, `170`), since mixed curb behavior increases congestion.
+1) **Evening demand stays concentrated in Manhattan, but intensifies around a few core corridors:**  
+
+The strongest corridor cells continue to cluster in the same Manhattan core zones (Upper East Side North/ South **236/237**, plus nearby Midtown-linked zones such as **161/162/163**). This matches the evening top pickup and drop-off hotspot lists and suggests a predictable “commute + after-work” pattern rather than dispersed demand.
+
+2) **The Upper East Side pair (236 ↔ 237) remains the dominant corridor, indicating sustained bidirectional pressure:**
+
+Both directions (236 → 237 and 237 → 236) appear among the highest volumes again in the evening. This is important for planning because it signals demand is not “one-way home” only. Curb space needs to handle pickups and drop-offs on both sides of the corridor during the same time window.
+
+3) **Cross-neighborhood links become more visible in the evening, reflecting more varied destinations:**
+     
+Compared with the morning rush, the evening heatmap shows a broader spread from Manhattan core zones into additional Midtown-adjacent and neighborhood zones (for example, Lincoln Square 142 143 and Upper West Side–related zones 238 239 appearing in the matrix). This suggests the evening peak is not purely a commute reversal; it includes trips to dining, entertainment, and transfers.
+
+4) **A small set of corridors still explains a large share of evening peak activity:**
+
+Even with more destination variety, the highest-volume pairs remain concentrated in a limited corridor set. This supports a **focus on the top corridors** planning approach that the most benefit comes from managing the most repeated PU×DO movements rather than trying to intervene everywhere.
+
+---
+
+### Key takeaway for evening planning:
+
+- **Prioritize evening-managed taxi stands along the Manhattan core corridors, especially 236/237 & Midtown-linked zones:**  
+Evening peak activity is corridor-shaped, so placing a stand in only one zone will not fully relieve pressure if the paired destination curb remains unmanaged.
+
+- **Plan 236 & 237 as a coordinated evening cluster, not isolated curb segments:**  
+Because flows are consistently high in both directions, stand placement, signage, and enforcement should be coordinated across both zones to prevent spillover stopping and double-parking.
+
+- **Design for variability: combine fixed stands in the top corridors with flexible loading rules in adjacent zones:**  
+Evening trips spread into more mixed destinations. A hybrid approach (fixed stands in the core corridors, plus short-term loading/clearway rules nearby) helps absorb demand spikes without overbuilding permanent infrastructure.
