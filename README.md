@@ -363,7 +363,7 @@ Evening trips spread into more mixed destinations. A hybrid approach (fixed stan
 - **Segment demand by weekday vs weekend + seasonality:**  
   Repeat hotspot and corridor analysis by day-of-week and month to identify whether the “top corridors” are stable year-round or driven by specific periods.
 
-- **Turn corridor heatmaps into a planning shortlist.**  
+- **Turn corridor heatmaps into a planning shortlist:**  
   Create a ranked “corridor watchlist” that flags: (1) strongest two-way corridors, (2) strongest within-zone flows, and (3) corridors linked to Midtown pressure points, so interventions can be targeted and time-windowed.
 
 - **Add map-based context for planner-friendly visualization:**
