@@ -18,94 +18,49 @@ This project provides both pricing and demand insights to support policy and inf
 
 ## Key Findings:
 
-### 1) Fare fairness varies substantially by pickup zone:
-Average fare per mile (`fare_amount / trip_distance`) differs widely across pickup zones (`PULocationID`). A small number of zones show extremely high values, meaning riders starting in those areas face a much higher effective cost per mile.
-
-- **High outlier examples:** `PULocationID = 1` (**~$2,048/mile**), followed by `84` (**~$293/mile**) and `206` (**~$145/mile**).
-- **Low-fare examples:** `PULocationID` values such as `110`, `99`, `105`, `44`, and `5` are much lower (about **$2.8–$4.2/mile**).
-
-These extreme high values are most consistent with short-distance trips in dense areas where the fixed starting fare and waiting-time component become a large share of the total fare.
-
-> Note: This project uses zone IDs (e.g., 236, 237). A zone lookup table can be joined later to convert IDs into neighborhood names for stronger stakeholder readability.
+### 1) Fare fairness varies substantially by pickup zone (with a small set of extreme outliers):
+Average fare-per-mile differs widely across pickup zones. The highest values are concentrated in a small number of zones and are most consistent with **very short-distance trips** in dense areas, where the fixed base fare and time-based components dominate the per-mile metric. 
 
 ---
 
-### 2) Peak vs off-peak: per-mile pricing is stable, but demand differs:
-Citywide, the average fare per mile is essentially the same across time buckets:
-- **PEAK:** ~**$7.53/mile**
-- **OFF_PEAK:** ~**$7.53/mile**
+### 2) Peak vs off-peak: per-mile pricing is stable, but demand differs materially:
+Citywide, average fare-per-mile is effectively the same across time buckets (~$7.53/mile), suggesting **no strong time-of-day price uplift** in fare-per-mile terms. The main temporal effect is **volume**:  
+- **PEAK trips (7–10AM and 4–7PM): ~13.25M**  
+- **OFF_PEAK trips (all other hours): ~17.11M**  
 
-However, trip volume changes substantially:
-- **PEAK trips:** ~**13.25M**
-- **OFF_PEAK trips:** ~**17.11M**
-
-This indicates the main temporal effect is **demand concentration**, not time-based price inflation.
+This points to **capacity + curb management** as the main operational issue, not time-based overcharging.
 
 ---
 
-### 3) Rush-hour hotspots concentrate in a small set of zones:
-The same zones repeatedly appear in the top 10 lists for both pickups and drop-offs during commuter peaks, indicating stable “mobility nodes” suitable for taxi stand investment.
-
-**Morning rush (7AM–10AM):**
-- **Top pickups:** `PULocationID 236` (**~304,282** trips), `237` (**~263,793** trips)
-- **Top drop-offs:** `DOLocationID 161` (**~304,260** trips), `237` (**~266,977**), `236` (**~261,453**)
-
-**Evening peak (4PM–7PM):**
-- **Top pickups:** `PULocationID 237` (**~444,859** trips), `236` (**~381,812** trips)
-- **Top drop-offs:** `DOLocationID 236` (**~383,631** trips), `237` (**~358,887** trips)
-
-These patterns suggest strong commuter-style flows that repeatedly connect the same core zones. For infrastructure planning, this consistency is more valuable than one-off spikes because it indicates persistent demand across the year.
+### 3) Rush-hour hotspots concentrate in a small Manhattan core and repeat across windows:
+The same zones recur in top-10 pickup and drop-off lists across commuter peaks, indicating **stable mobility nodes** suitable for targeted taxi infrastructure.  
+- Morning rush (7–10AM): pickups are led by **Upper East Side North (236)** and **Upper East Side South (237)**; drop-offs are led by **Midtown Center (161)** alongside **236/237**.
+- Evening peak (4–7PM): pickups and drop-offs remain dominated by **236/237** (plus nearby Midtown/Manhattan zones).
 
 ## Recommendations:
 
-### 1) Prioritise taxi stands and curb pickup space in the highest two-way demand corridor (Zones **236 ↔ 237**):
-Provision additional **taxi stands**, **dedicated curb pickup space**, and **clear wayfinding** in zones **236** and **237**. Because demand is consistently high in both directions, this location is likely to deliver the largest operational benefit like reduced curbside congestion, improved pickup flow, or better driver turnover.
+### 1) Prioritise taxi stands and managed curb pickup space along the highest two-way demand corridor (236 ↔ 237):
+The strongest recurring flows and the corridor heatmaps point to **Upper East Side North (236)** and **Upper East Side South (237)** as a high-leverage corridor for reducing curb friction. Focus on **clear stand placement, wayfinding, and active enforcement** to reduce double-parking and random curb stops.
 
-### 2) Treat **Zone 161** as a commuter “pressure point” & Improve peak-hour drop-off handling:
-Around Zone **161** during morning rush, consider operational controls such as:
-- designated taxi loading zones (pick-up/drop-off separation),
-- short-stay holding areas,
-- signage and lane markings to reduce double-parking and bottlenecks.
-This is especially relevant where the same zones dominate both pickup and drop-off activities. Implement these **drop-off prioritisation and curb separation** will have reduce bottlenecks and improve pedestrian safety around these heavy commuter movements.
+---
 
-### 3) Use time-based curb rules for recurring peak hotspots (Zones **162, 170, 142, 163, 234, 239**):
-Instead of building permanent taxi infrastructure everywhere, apply **peak-hour curb management** in zones that repeatedly appear in the top 10 hotspot lists. This targets demand when it is highest, while keeping curb space available outside peak periods.
+### 2) Treat Midtown Center (161) as a commuter “pressure point” in the morning and manage drop-off friction:
+Morning drop-offs concentrate strongly around Midtown (especially **161**), suggesting peak-hour congestion risk from drop-offs competing with pickups and through-traffic. Implement **pickup vs drop-off separation**, short-stay loading rules, and signage/lane markings near key Midtown arrival points to improve throughput and pedestrian safety.
 
-**Recurring hotspot zones:**
-- **Morning rush pickups (7–10AM):** `236`, `237`, `186`, `141`, `170`, `239`, `238`, `140`, `142`, `162`  
-- **Evening peak pickups (4–7PM):** `237`, `236`, `161`, `162`, `142`, `170`, `132`, `163`, `239`, `234`  
-- **Evening peak drop-offs (4–7PM):** `236`, `237`, `239`, `142`, `141`, `238`, `48`, `170`, `263`, `79`  
+---
 
-**Recommended Actions:**
-- time-window taxi loading zones (7–10AM and 4–7PM)
-- pickup vs drop-off separation
-- short-stay holding rules to reduce double-parking and curb conflicts
+### 3) Use time-window curb rules for recurring peak hotspots, building “surge operations” and not citywide permanent buildout:
+Rather than placing permanent infrastructure everywhere, apply **peak-hour curb management (7–10AM, 4–7PM)** in zones that repeatedly appear in hotspot lists. This targets demand when it is highest while preserving curb flexibility outside peak periods.
 
-This approach improves traffic flow and passenger safety during peak periods, without permanently removing curb capacity for other uses.
+---
 
-### 4) Investigate extreme fare-per-mile outliers before proposing pricing policy changes:
-Fare-per-mile differs sharply by pickup zone:
-- **High outliers:** `PULocationID = 1` (**~$2,048/mile**), then `84` (**~$293/mile**) and `206` (**~$145/mile**)
-- **Low-fare zones:** `110`, `99`, `105`, `44`, `5` (about **$2.8–$4.2/mile**)
+### 4) Plan corridor-first (PU×DO) interventions, not only zone-first interventions:
+Heatmaps show demand clusters into a limited set of corridors. For the highest-volume corridors, small operational improvements (consistent enforcement, clear loading rules, curb signage) can reduce congestion without large construction. Place and manage stands where they relieve **both ends of the corridor** (origins and destinations), not only at the “top pickup zone.”
 
-These extremes are likely driven by **very short trips**, where the base fare and time-based charges dominate while distance is small.
- 
-Before intervention, validate whether the pattern persists after robustness checks such as:
-- compare **median vs mean** fare-per-mile by zone,
-- exclude **ultra-short trips** (e.g., below a small distance threshold),
-- reviewing the distribution of trip distances in the outlier zones.
+---
 
-This prevents policy decisions being driven by metric inflation from short-distance trips.
-
-### 5) Plan operations beyond rush hours because off-peak demand is higher overall:
-Trip volume is higher outside the defined peak windows:
-- **OFF_PEAK:** **~17.11M** trips  
-- **PEAK:** **~13.25M** trips
-
-Meanwhile, **average fare-per-mile is stable (~$7.53)** across both buckets.
-
-Ensure taxi-stand capacity planning and enforcement is designed for **full-day demand**, not only rush hours. Peak-time rules should be complemented by steady baseline infrastructure where demand remains consistently high across the day.
-
+### 5) Design beyond rush hours because off-peak demand is higher overall:
+Because OFF_PEAK trips exceed PEAK trips (~17.11M vs ~13.25M), baseline taxi-stand capacity and enforcement should support **full-day demand**, with peak-time rules layered on top for commuter surges.
 
 ## Dataset:
 **Data source:** [NYC Taxi & Limousine Commission (TLC) – Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
