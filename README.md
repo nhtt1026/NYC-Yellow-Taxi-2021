@@ -335,3 +335,42 @@ Because flows are consistently high in both directions, stand placement, signage
 
 - **Design for variability: combine fixed stands in the top corridors with flexible loading rules in adjacent zones:**  
 Evening trips spread into more mixed destinations. A hybrid approach (fixed stands in the core corridors, plus short-term loading/clearway rules nearby) helps absorb demand spikes without overbuilding permanent infrastructure.
+
+## Limitations & Next Steps:
+
+### Limitations:
+- **“Fare per mile” can be inflated by short trips:**  
+  Very short rides can produce unusually high $/mile because base fare and time-based charges dominate when distance is small. This means extreme outliers should be treated as a *signal to investigate*, not immediate evidence of unfair pricing.
+
+- **Zone granularity can hide street-level pinch points:**  
+  Results are aggregated to TLC taxi zones, so recommendations identify *where demand concentrates* but cannot pinpoint the exact curb segments, intersections, or loading locations that cause the bottlenecks.
+
+- **Time windows are simplified and do not account for day-of-week or seasonal patterns:**  
+  Morning (7–10AM) and evening (4–7PM) windows capture commute peaks, but they do not separate weekday vs weekend, seasonal effects, holidays, or event-driven spikes.
+
+- **External drivers are not modeled:**  
+  Weather, events, transit disruptions, and construction can create short-term surges that a year-aggregated view will smooth out.
+
+- **Corridor heatmaps prioritize the top pairs:**  
+  Focusing on the top corridors is appropriate for planning, but lower-volume corridors may still matter for equity, neighborhood coverage, or localized congestion.
+
+---
+
+### Next Steps:
+- **Robustness checks for fare fairness (reduce outlier bias):**  
+    Add median fare-per-mile by zone, exclude ultra-short trips (e.g., < 0.5 miles), and compare results to reduce the risk of decisions driven by metric inflation.
+
+- **Segment demand by weekday vs weekend + seasonality:**  
+  Repeat hotspot and corridor analysis by day-of-week and month to identify whether the “top corridors” are stable year-round or driven by specific periods.
+
+- **Turn corridor heatmaps into a planning shortlist.**  
+  Create a ranked “corridor watchlist” that flags: (1) strongest two-way corridors, (2) strongest within-zone flows, and (3) corridors linked to Midtown pressure points, so interventions can be targeted and time-windowed.
+
+- **Add map-based context for planner-friendly visualization:**
+  Join TLC taxi zone geometries and visualize the top corridors on a city map (lines connecting PU→DO centroids). This makes the results easier to interpret than a matrix alone.
+
+- **Build a simple forecasting layer for staffing or curb rules:**  
+  Train a lightweight model (or time-series baseline) to predict corridor volumes by hour/day. This supports dynamic enforcement and temporary loading rules during predictable surges.
+
+- **Expand to multi-modal context for completeness:**  
+  Incorporate other TLC datasets (e.g., FHVs) to measure whether taxi corridor hotspots match or differ from ride-hail patterns, strengthening policy relevance for curb management.
